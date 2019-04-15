@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
   @override
   MyAppState createState() => new MyAppState();
 }
-
+enum TestEnum { A }
 class MyAppState extends State<MyApp> {
   String text = "";
   @override
@@ -41,6 +41,22 @@ class MyAppState extends State<MyApp> {
                   });
                 }
             ),
+            new PopupMenuButton(
+                itemBuilder: (BuildContext ctxt){
+                  return <PopupMenuEntry<TestEnum>>[
+                    new PopupMenuItem(
+                        child: new FlatButton(
+                            onPressed: (){
+                              setState(() {
+                                text = "Popup";
+                              });
+                            },
+                            child: new Text("Button")
+                        )
+                    )
+                  ];
+                  }
+                )
           ],
         ),
         body: new Column(
