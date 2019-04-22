@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+
+
+
 void main(){
   runApp(new MyApp(
-    title: new Text("My App"),
+    title: new Text("ToDo List"),
     someText: new Text("Some text...")
   ));
 }
@@ -19,8 +22,17 @@ class MyAppState extends State<MyApp> {
   List<String> textList = [];
   List<bool> textChkBox = [];
 
+
   Widget build(BuildContext ctxt) {
     return new MaterialApp(
+      theme: new ThemeData(
+          primarySwatch: Colors.deepPurple,
+          primaryTextTheme: TextTheme(
+              title: TextStyle(
+                  color: Colors.white
+              )
+          )
+      ),
       home: new Scaffold(
         appBar: new AppBar(
             title: widget.title,
@@ -56,13 +68,13 @@ class MyAppState extends State<MyApp> {
 
         body: new Column(
           children: <Widget>[
-            new Text("Hello flutter"),
+            new Text("Add your list of things to do"),
             showDialog ==  true?
             new AlertDialog(
-              title: new Text("Alert dialog"),
+              title: new Text("Add things to do"),
               content: new TextField(
                 controller: eCtrl,
-                decoration: new InputDecoration.collapsed(hintText: "ADD XYZ"),
+                decoration: new InputDecoration.collapsed(hintText: "Enter text here"),
                 maxLines: 3,
                 onSubmitted: (String text) {
 
@@ -73,10 +85,14 @@ class MyAppState extends State<MyApp> {
                 new FlatButton(
                     onPressed: () {
                       setState(() {
-                        showDialog =  false;
-                        textList.add(eCtrl.text);
-                        textChkBox.add(false);
-                        eCtrl.clear();
+                        if (eCtrl.text == ""){
+                          showDialog = false;
+                        } else {
+                          showDialog = false;
+                          textList.add(eCtrl.text);
+                          textChkBox.add(false);
+                          eCtrl.clear();
+                        }
                       });
                     },
                     child: new Text("OK")
